@@ -2,3 +2,4 @@
 add_executable(
         Projectile_Sample ch1.cpp
 )
+target_link_libraries(Projectile_Sample raytracer_lib)

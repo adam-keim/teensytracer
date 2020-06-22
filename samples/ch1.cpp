@@ -22,16 +22,21 @@ struct Environment {
 
 };
 
-void tick(Environment const &env, Projectile const &proj) {
+void tick(Environment const &env, Projectile &proj) {
     proj.m_position = proj.m_position + proj.m_velocity;
     proj.m_velocity = proj.m_velocity + env.m_gravity + env.m_wind;
 }
 
 int main() {
     std::cout << "test";
-    Projectile p = Projectile(Point(0, 1, 0), Vector(1, 1, 0).Normalize());
+    Projectile p = Projectile(Point(0, 10, 0), Vector(1, 3, 0));
     Environment e = Environment(Vector(0, -.1, 0), Vector(-.01, 0, 0));
+    int ticks = 0;
     do {
         tick(e, p);
+        ticks += 1;
+        std::cout << "Ticks: " << ticks << "\n";
+        std::cout << "Position - X: " << p.m_position.x << " Y: " << p.m_position.y << " Z: " << p.m_position.z << "\n";
+
     } while (p.m_position.y > 0);
 }

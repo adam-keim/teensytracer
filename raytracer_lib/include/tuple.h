@@ -15,9 +15,9 @@ public:
 
     Tuple(float x, float y, float z, float w);
 
-    bool IsPoint();
+    bool IsPoint() const;
 
-    bool IsVector();
+    bool IsVector() const;
 
     float Magnitude();
 
@@ -39,7 +39,7 @@ public:
 
     friend Tuple operator/(Tuple const &, float const);
 
-    Tuple& operator=(Tuple const &);
+    inline Tuple& operator=(Tuple const &) = default;
 };
 
 Tuple Point(float x, float y, float z);

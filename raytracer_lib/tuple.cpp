@@ -13,11 +13,11 @@ Tuple::Tuple(float x, float y, float z, float w) {
     this->w = w;
 }
 
-bool Tuple::IsPoint() {
+bool Tuple::IsPoint() const{
     return this->w == 1.0;
 }
 
-bool Tuple::IsVector() {
+bool Tuple::IsVector() const{
     return this->w == 0.0;
 }
 
