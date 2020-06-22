@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCE_FILES main.cpp)
 add_executable(raytracer_run ${SOURCE_FILES})
 
-add_subdirectory(test)
 include_directories(raytracer_lib)
 add_subdirectory(raytracer_lib)
 target_link_libraries(raytracer_run raytracer_lib)
+add_subdirectory(test)
 
