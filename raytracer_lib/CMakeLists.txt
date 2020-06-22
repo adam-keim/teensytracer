@@ -1,6 +1,3 @@
-project(teensytracer)
-
-
 set(SOURCE_FILES
         tuple.cpp
         )
