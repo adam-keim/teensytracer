@@ -38,6 +38,8 @@ public:
     friend Tuple operator*(Tuple const &, float const);
 
     friend Tuple operator/(Tuple const &, float const);
+
+    Tuple& operator=(Tuple const &);
 };
 
 Tuple Point(float x, float y, float z);

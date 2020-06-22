@@ -75,6 +75,7 @@ Tuple operator/(Tuple const &t, float const c) {
     );
 }
 
+
 float Tuple::Magnitude() {
     return sqrt(
             pow(this->x, 2) +
