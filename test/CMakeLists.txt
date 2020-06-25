@@ -1,6 +1,7 @@
 add_executable(raytracer_test
         TupleTest.cpp
-        ColorTest.cpp)
+        ColorTest.cpp
+        CanvasTest.cpp)
 
 
 target_link_libraries(raytracer_test raytracer_lib)

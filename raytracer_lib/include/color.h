@@ -4,15 +4,21 @@
 
 #ifndef TEENSYTRACER_COLOR_H
 #define TEENSYTRACER_COLOR_H
+
 #include "tuple.h"
 
-class Color : public Tuple{
+class Color : public Tuple {
 public:
     Color(float red, float green, float blue) : Tuple(red, green, blue, 0.0f) {};
+
     float red() const;
+
     float green() const;
+
     float blue() const;
+
     friend Color operator*(Color const &, Color const &);
+
 };
 
 
