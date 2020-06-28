@@ -3,7 +3,7 @@ set(TOOLCHAIN_PREFIX arm-none-eabi)
 set(TOOLCHAIN_ROOT /usr/local)
 set(TEENSY_CORES_ROOT ${CMAKE_SOURCE_DIR}/cores)
 set(TEENSY_ROOT ${TEENSY_CORES_ROOT}/teensy4)
-
+set(VERBOSE 1)
 set(TEENSY_FREQUENCY 600)
 set(TEENSY_USB_MODE serial)
 set(MCU IMXRT1062)
@@ -33,10 +33,12 @@ include_directories("${TEENSY_ROOT}")
 #set(CMAKE_C_FLAGS "${BASE_FLAGS} -DTIME_T=1421620748" CACHE STRING "c flags") # XXX Generate TIME_T dynamically.
 #set(CMAKE_CXX_FLAGS "${BASE_FLAGS} -fno-exceptions -fno-rtti -felide-constructors -std=gnu++14" CACHE STRING "c++ flags")
 
-set(OPTIONS "-DF_CPU=${TEENSY_FREQUENCY}000000 -DUSB_SERIAL -D__${MCU}__ -DARDUINO=10810 -DTEENSYDUINO=149 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH")
+set(OPTIONS "-DF_CPU=${TEENSY_FREQUENCY}000000 -DUSB_SERIAL -D__${MCU}__ -DARDUINO=10810 -DTEENSYDUINO=149 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DUSING_MAKEFILE")
 set(CPU_OPTIONS "-mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -mthumb")
-set(CMAKE_C_FLAGS "-Wall -g -O2 ${CPU_OPTIONS} -MMD ${OPTIONS} -I. -ffunction-sections -fdata-sections")
+set(BASE_FLAGS "-Wall -g -O2 ${CPU_OPTIONS} -MMD ${OPTIONS} -I. -ffunction-sections -fdata-sections")
+set(CMAKE_C_FLAGS "${BASE_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=gnu++14 -felide-constructors -fno-exceptions -fpermissive -fno-rtti -Wno-error=narrowing")
+
 
 set(LINKER_FLAGS "-Os -Wl,--gc-sections,--relax ${CPU_OPTIONS} -T${TEENSY_ROOT}/${MCU_LOWER}.ld")
 #set(LINKER_LIBS  "-larm_cortexM7lfsp_math -lm -lstdc++")

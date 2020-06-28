@@ -1,8 +1,6 @@
-//
-// Created by Adam Keim on 6/28/20.
-//
-#include "Arduino.h"
-const int led = LED_BUILTIN;
+#include <Arduino.h>
+
+int led = 13;
 
 void setup() {
     pinMode(led, OUTPUT);
@@ -10,8 +8,7 @@ void setup() {
 
 void loop() {
     digitalWrite(led, HIGH);
-    delay(100);
+    delay(1000);
     digitalWrite(led, LOW);
-    delay(100);
+    delay(1000);
 }
-
