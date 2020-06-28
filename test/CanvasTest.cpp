@@ -33,7 +33,7 @@ TEST_CASE("Canvas PPM Output") {
         Canvas c = Canvas(5, 3);
         std::stringstream ostr;
         ostr << c;
-        CHECK(ostr.str().substr(0, 11) == "P3\n3 5\n255\n");
+        CHECK(ostr.str().substr(0, 11) == "P3\n5 3\n255\n");
     } SECTION("Creating pixel Data") {
         Canvas c = Canvas(5, 3);
         Color c1 = Color(1.5, 0, 0);

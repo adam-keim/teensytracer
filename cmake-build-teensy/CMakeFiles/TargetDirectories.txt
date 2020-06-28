@@ -1,0 +1,13 @@
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/CMakeFiles/rebuild_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/CMakeFiles/edit_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/CMakeFiles/raytracer_run.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/raytracer_lib/CMakeFiles/rebuild_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/raytracer_lib/CMakeFiles/edit_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/raytracer_lib/CMakeFiles/raytracer_lib.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/test/CMakeFiles/rebuild_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/test/CMakeFiles/edit_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/test/CMakeFiles/raytracer_test.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/samples/CMakeFiles/rebuild_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/samples/CMakeFiles/edit_cache.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/samples/CMakeFiles/Canvas_Sample.dir
+/Users/adamkeim/CLionProjects/teensytracer/cmake-build-teensy/samples/CMakeFiles/Projectile_Sample.dir

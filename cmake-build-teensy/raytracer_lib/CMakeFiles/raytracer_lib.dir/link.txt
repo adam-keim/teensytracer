@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libraytracer_lib.a  CMakeFiles/raytracer_lib.dir/tuple.cpp.o CMakeFiles/raytracer_lib.dir/color.cpp.o CMakeFiles/raytracer_lib.dir/canvas.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libraytracer_lib.a
