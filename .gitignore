@@ -2,3 +2,5 @@
 # Project exclude paths
 /cmake-build-debug/
 /cmake-build-teensy/
+
+.DS_Store
