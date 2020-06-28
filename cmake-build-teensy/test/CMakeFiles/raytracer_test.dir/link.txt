@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/raytracer_test.dir/TupleTest.cpp.o CMakeFiles/raytracer_test.dir/ColorTest.cpp.o CMakeFiles/raytracer_test.dir/CanvasTest.cpp.o  -o raytracer_test  ../raytracer_lib/libraytracer_lib.a 
