@@ -4,12 +4,28 @@ project(teensytracer)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(SOURCE_FILES main.cpp)
-add_executable(raytracer_run ${SOURCE_FILES})
 
-include_directories(raytracer_lib)
-target_link_libraries(raytracer_run raytracer_lib)
-add_subdirectory(raytracer_lib)
-add_subdirectory(test)
-add_subdirectory(samples)
+
+if (DO_ARM EQUAL 1)
+    set(CMAKE_TOOLCHAIN_FILE cmake/toolchain-arm-none-eabi.cmake)
+    include_directories(raytracer_lib)
+    add_subdirectory(raytracer_lib)
+    add_subdirectory(teensy)
+    set(SOURCE_FILES main.cpp)
+    add_executable(raytracer_run ${SOURCE_FILES})
+    target_link_libraries(raytracer_run raytracer_lib)
+
+    MESSAGE("Doing Arm")
+endif(DO_ARM EQUAL 1)
+
+if (DO_ARM EQUAL 0)
+
+    include_directories(raytracer_lib)
+    add_subdirectory(raytracer_lib)
+    set(SOURCE_FILES main.cpp)
+    add_executable(raytracer_run ${SOURCE_FILES})
+    target_link_libraries(raytracer_run raytracer_lib)
+    add_subdirectory(test)
+    add_subdirectory(samples)
+endif (DO_ARM EQUAL 0)
 
