@@ -75,10 +75,6 @@ add_library(${TARGET_NAME}_TC
         ${TEENSY_C_CORE_FILES}
         ${TEENSY_CXX_CORE_FILES}
         )
-set_source_files_properties(${TEENSY_C_CORE_FILES}
-        PROPERTIES COMPILE_FLAGS ${TARGET_C_FLAGS})
-set_source_files_properties(${TEENSY_CXX_CORE_FILES}
-        PROPERTIES COMPILE_FLAGS ${TARGET_CXX_FLAGS})
 target_include_directories(${TARGET_NAME}_TC PUBLIC ${TEENSY_ROOT})
 add_executable(
         ${TARGET_NAME} main.cpp

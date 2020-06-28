@@ -2,6 +2,7 @@
 
 int led = 13;
 
+#error "Another one"
 void setup() {
     pinMode(led, OUTPUT);
 }
