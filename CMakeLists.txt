@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
+
+if (DO_ARM EQUAL 1)
+    set(CMAKE_TOOLCHAIN_FILE cmake/toolchain-arm-none-eabi.cmake)
+endif (DO_ARM EQUAL 1)
+
 project(teensytracer)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -7,7 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 if (DO_ARM EQUAL 1)
-    set(CMAKE_TOOLCHAIN_FILE cmake/toolchain-arm-none-eabi.cmake)
     include_directories(raytracer_lib)
     add_subdirectory(raytracer_lib)
     add_subdirectory(teensy)
