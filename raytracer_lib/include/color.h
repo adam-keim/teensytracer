@@ -19,6 +19,10 @@ public:
 
     friend Color operator*(Color const &, Color const &);
 
+    Color to_rgb() const;
+
+    Color to_clamped_rgb() const;
+
 };
 
 

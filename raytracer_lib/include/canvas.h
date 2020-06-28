@@ -29,13 +29,12 @@ public:
 
     friend std::ostream &operator<<(std::ostream& os, const Canvas &c) {
         c.WritePPMHeader(os);
-// c.WritePPMPixels(os);
+        c.WritePPMPixels(os);
         return os;
     }
 protected:
     void WritePPMHeader(std::ostream& out) const;
     void WritePPMPixels(std::ostream& out) const;
-    void WritePPMPixelsRow(std::ostream& out, int row) const;
 private:
     int m_width;
     int m_height;
