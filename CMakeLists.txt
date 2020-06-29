@@ -16,10 +16,10 @@ if (DO_ARM EQUAL 1)
     include_directories(raytracer_lib)
     add_subdirectory(raytracer_lib)
     add_subdirectory(teensy)
+    add_subdirectory(libs)
     set(SOURCE_FILES main.cpp)
     add_executable(raytracer_run ${SOURCE_FILES})
     target_link_libraries(raytracer_run raytracer_lib)
-
     MESSAGE("Doing Arm")
 endif(DO_ARM EQUAL 1)
 

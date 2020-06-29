@@ -6,7 +6,6 @@
 #define TEENSYTRACER_TUPLE_H
 
 #define EPSILON .001
-
 bool equal(float a, float b);
 
 class Tuple {

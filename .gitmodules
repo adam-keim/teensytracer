@@ -13,3 +13,12 @@
 [submodule "libs/ArduinoCore-avr"]
 	path = libs/ArduinoCore-avr
 	url = git@github.com:arduino/ArduinoCore-avr.git
+[submodule "libs/SPI"]
+	path = libs/SPI
+	url = https://github.com/PaulStoffregen/SPI
+[submodule "libs/Wire"]
+	path = libs/Wire
+	url = https://github.com/PaulStoffregen/Wire
+[submodule "libs/TFT_ILI93XX"]
+	path = libs/TFT_ILI93XX
+	url = git@github.com:sumotoy/TFT_ILI93XX.git

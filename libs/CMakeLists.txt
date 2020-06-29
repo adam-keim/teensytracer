@@ -1,12 +1,23 @@
-set(SOURCE_FILES
-        Adafruit_BusIO/Adafruit_BusIO_Register.cpp
-        Adafruit_BusIO/Adafruit_I2CDevice.cpp
-        Adafruit_BusIO/Adafruit_SPIDevice.cpp
-        Adafruit-GFX-Library/Adafruit_GFX.cpp
-        Adafruit-GFX-Library/Adafruit_MonoOLED.cpp
-        Adafruit-GFX-Library/Adafruit_SPITFT.cpp
-        Adafruit_ILI9341/Adafruit_ILI9341.cpp
-        )
 
-add_library(adafruit STATIC ${SOURCE_FILES})
-target_include_directories(adafruit PUBLIC Adafruit_ILI9341 Adafruit-GFX-Library Adafruit_BusIO)
+set(SPI_SOURCE_FILES
+       SPI/spi.cpp
+        )
+add_library(SPI STATIC ${SPI_SOURCE_FILES})
+target_include_directories(SPI PUBLIC
+        SPI)
+
+set(WIRE_SOURCE_FILES
+        Wire/Wire.cpp
+        Wire/WireIMXRT.cpp
+        Wire/WireKinetis.cpp
+        )
+add_library(Wire STATIC ${WIRE_SOURCE_FILES})
+target_include_directories(Wire PUBLIC Wire)
+
+set(SOURCE_FILES
+        TFT_ILI93XX/TFT_ILI93XX.cpp
+            )
+
+add_library(oled STATIC ${SOURCE_FILES})
+target_include_directories(oled PUBLIC TFT_ILI93XX TFT_ILI93XX/_includes)
+target_link_libraries(oled SPI Wire)

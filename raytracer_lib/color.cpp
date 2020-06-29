@@ -3,7 +3,7 @@
 //
 
 #include "color.h"
-#include "cmath"
+#include "math.h"
 
 float Color::red() const {
     return this->x;
@@ -25,9 +25,9 @@ Color operator*(Color const &c1, Color const &c2) {
 }
 
 Color Color::to_clamped_rgb() const {
-    int red = std::fmax(0, std::fmin(255, ceil(this->red() * 255)));
-    int green = std::fmax(0, std::fmin(255, ceil(this->green() * 255)));
-    int blue = std::fmax(0, std::fmin(255, ceil(this->blue() * 255)));
+    int red = fmax(0, fmin(255, ceil(this->red() * 255)));
+    int green = fmax(0, fmin(255, ceil(this->green() * 255)));
+    int blue = fmax(0, fmin(255, ceil(this->blue() * 255)));
     return Color(red, green, blue);
 }
 

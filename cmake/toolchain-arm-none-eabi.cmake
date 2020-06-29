@@ -33,7 +33,7 @@ include_directories("${TEENSY_ROOT}")
 #set(CMAKE_C_FLAGS "${BASE_FLAGS} -DTIME_T=1421620748" CACHE STRING "c flags") # XXX Generate TIME_T dynamically.
 #set(CMAKE_CXX_FLAGS "${BASE_FLAGS} -fno-exceptions -fno-rtti -felide-constructors -std=gnu++14" CACHE STRING "c++ flags")
 
-set(OPTIONS "-DF_CPU=${TEENSY_FREQUENCY}000000 -DUSB_SERIAL -D__${MCU}__ -DARDUINO=10810 -DTEENSYDUINO=149 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH -DUSING_MAKEFILE")
+set(OPTIONS "-DF_CPU=${TEENSY_FREQUENCY}000000 -DUSB_SERIAL -D__${MCU}__ -DARDUINO=10810 -DTEENSYDUINO=149 -DARDUINO_TEENSY40 -DLAYOUT_US_ENGLISH")
 set(CPU_OPTIONS "-mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -mthumb")
 set(BASE_FLAGS "-Wall -g -O2 ${CPU_OPTIONS} -MMD ${OPTIONS} -I. -ffunction-sections -fdata-sections")
 set(CMAKE_C_FLAGS "${BASE_FLAGS}")

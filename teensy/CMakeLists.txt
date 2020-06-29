@@ -79,7 +79,8 @@ target_include_directories(${TARGET_NAME}_TC PUBLIC ${TEENSY_ROOT})
 add_executable(
         ${TARGET_NAME} main.cpp
 )
-target_link_libraries(${TARGET_NAME} raytracer_lib ${TARGET_NAME}_TC)
+target_link_libraries(${TARGET_NAME} oled ${TARGET_NAME}_TC)
+target_link_libraries(${TARGET_NAME} raytracer_lib)
 set_target_properties(${TARGET_NAME} PROPERTIES
         OUTPUT_NAME ${TARGET_NAME}
         SUFFIX ".elf"
