@@ -1,3 +1,12 @@
 [submodule "cores"]
 	path = cores
 	url = https://github.com/PaulStoffregen/cores.git
+[submodule "libs/Adafruit_ILI9341"]
+	path = libs/Adafruit_ILI9341
+	url = git@github.com:adafruit/Adafruit_ILI9341.git
+[submodule "libs/Adafruit-GFX-Library"]
+	path = libs/Adafruit-GFX-Library
+	url = git@github.com:adafruit/Adafruit-GFX-Library.git
+[submodule "libs/Adafruit_BusIO"]
+	path = libs/Adafruit_BusIO
+	url = git@github.com:adafruit/Adafruit_BusIO.git
