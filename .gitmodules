@@ -10,3 +10,6 @@
 [submodule "libs/Adafruit_BusIO"]
 	path = libs/Adafruit_BusIO
 	url = git@github.com:adafruit/Adafruit_BusIO.git
+[submodule "libs/ArduinoCore-avr"]
+	path = libs/ArduinoCore-avr
+	url = git@github.com:arduino/ArduinoCore-avr.git
