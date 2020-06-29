@@ -8,19 +8,16 @@
 Canvas::Canvas(int width, int height)
         : m_height(height),
           m_width(width),
-          m_pixels(nullptr) {
-    m_pixels = (Color*)calloc(width * height, sizeof(Color));
+    m_pixels(width, std::vector<Color>(height, Color(0,0,0))) {
 }
 
 Canvas::~Canvas() {
-    if (m_pixels != nullptr) {
-        free(m_pixels);
-        m_pixels = nullptr;
-    }
+    m_pixels.clear();
+    m_pixels.shrink_to_fit();
 }
 
 Color Canvas::PixelAt(int x, int y) const {
-    return m_pixels[x + m_width * y];
+    return m_pixels[x][y];
 }
 
 void Canvas::WritePPMHeader(std::ostream &out) const {
@@ -90,5 +87,5 @@ void Canvas::WritePPMPixels(std::ostream &out) const {
 
 void Canvas::WritePixel(int x, int y, const Color &color) {
     if (x >= m_width || y >= m_height) return;
-    m_pixels[x + m_width * y] = color;
+    m_pixels[x][y] = color;
 }

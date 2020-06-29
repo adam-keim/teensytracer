@@ -22,3 +22,6 @@
 [submodule "libs/TFT_ILI93XX"]
 	path = libs/TFT_ILI93XX
 	url = git@github.com:sumotoy/TFT_ILI93XX.git
+[submodule "libs/eigen"]
+	path = libs/eigen
+	url = https://gitlab.com/libeigen/eigen.git

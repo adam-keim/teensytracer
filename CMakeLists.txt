@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 if (DO_ARM EQUAL 1)
+    find_package (Eigen3 3.3 REQUIRED NO_MODULE)
     include_directories(cores/teensy4)
     include_directories(raytracer_lib)
     add_subdirectory(raytracer_lib)
@@ -24,7 +25,7 @@ if (DO_ARM EQUAL 1)
 endif(DO_ARM EQUAL 1)
 
 if (DO_ARM EQUAL 0)
-
+    find_package (Eigen3 3.3 REQUIRED NO_MODULE)
     include_directories(raytracer_lib)
     add_subdirectory(raytracer_lib)
     set(SOURCE_FILES main.cpp)

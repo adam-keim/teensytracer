@@ -8,6 +8,7 @@
 #include "color.h"
 #include <ostream>
 #include <string>
+#include <vector>
 
 class Canvas {
 public:
@@ -38,7 +39,7 @@ protected:
 private:
     int m_width;
     int m_height;
-    Color *m_pixels;
+    std::vector<std::vector<Color>> m_pixels;
 };
 
 
