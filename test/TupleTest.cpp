@@ -6,24 +6,23 @@
 
 #include "catch.hpp"
 #include "include/tuple.h"
-
 TEST_CASE("Tuple Creation") {
     SECTION("Point Tuple") {
         Tuple t = Tuple(4.3, -4.2, 3.1, 1.0);
-        CHECK(t.x == 4.3f);
-        CHECK(t.y == -4.2f);
-        CHECK(t.z == 3.1f);
-        CHECK(t.w == 1.0f);
+        CHECK(t.x() == 4.3f);
+        CHECK(t.y() == -4.2f);
+        CHECK(t.z() == 3.1f);
+        CHECK(t.w() == 1.0f);
         CHECK(t.IsPoint());
         CHECK(!t.IsVector());
     }
 
     SECTION("Vector Tuple") {
         Tuple t = Tuple(4.3, -4.2, 3.1, 0.0);
-        CHECK(t.x == 4.3f);
-        CHECK(t.y == -4.2f);
-        CHECK(t.z == 3.1f);
-        CHECK(t.w == 0.0f);
+        CHECK(t.x() == 4.3f);
+        CHECK(t.y() == -4.2f);
+        CHECK(t.z() == 3.1f);
+        CHECK(t.w() == 0.0f);
         CHECK(!t.IsPoint());
         CHECK(t.IsVector());
     }
@@ -84,32 +83,33 @@ TEST_CASE("Tuple Basic Operations") {
 TEST_CASE("Tuple advanced operations") {
     SECTION("Magnitude") {
         Tuple a1 = Vector(1, 0, 0);
-        CHECK(equal(a1.Magnitude(), 1));
+        CHECK(equal(a1.norm(), 1));
         Tuple a2 = Vector(0, 1, 0);
-        CHECK(equal(a2.Magnitude(), 1));
+        CHECK(equal(a2.norm(), 1));
         Tuple a3 = Vector(0, 0, 1);
-        CHECK(equal(a3.Magnitude(), 1));
+        CHECK(equal(a3.norm(), 1));
         Tuple a4 = Vector(1, 2, 3);
-        CHECK(equal(a4.Magnitude(), sqrt(14)));
+        CHECK(equal(a4.norm(), sqrt(14)));
         Tuple a5 = Vector(-1, -2, -3);
-        CHECK(equal(a5.Magnitude(), sqrt(14)));
+        CHECK(equal(a5.norm(), sqrt(14)));
 
     }SECTION("Normalize") {
         Tuple v1 = Vector(4, 0, 0);
-        CHECK(v1.Normalize() == Vector(1, 0, 0));
+        CHECK(v1.normalized().isApprox(Vector(1, 0, 0)));
 
         Tuple v2 = Vector(1, 2, 3);
-        CHECK(v2.Normalize() == Vector(0.26726, 0.53452, 0.80178));
+        CHECK(v2.normalized().isApprox(Vector(0.26726, 0.53452, 0.80178)));
 
-        CHECK(equal(v2.Normalize().Magnitude(), 1));
+        CHECK(equal(v2.normalized().norm(), 1));
     }SECTION("Dot Product") {
         Tuple a = Vector(1, 2, 3);
         Tuple b = Vector(2, 3, 4);
-        CHECK(equal(a.Dot(b), 20));
+        CHECK(equal(a.dot(b), 20));
     }SECTION("Cross Product") {
         Tuple a = Vector(1,2,3);
         Tuple b = Vector(2,3,4);
-        CHECK(a.Cross(b) == Vector(-1, 2, -1));
-        CHECK(b.Cross(a) == Vector(1, -2, 1));
+        auto v = a.cross3(b);
+        CHECK(v.isApprox(Vector(-1, 2, -1), EPSILON));
+        CHECK(b.cross3(a).isApprox(Vector(1, -2, 1)));
     }
 }

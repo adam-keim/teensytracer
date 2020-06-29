@@ -6,15 +6,15 @@
 #include "math.h"
 
 float Color::red() const {
-    return this->x;
+    return this->x();
 }
 
 float Color::green() const {
-    return this->y;
+    return this->y();
 }
 
 float Color::blue() const {
-    return this->z;
+    return this->z();
 }
 
 Color operator*(Color const &c1, Color const &c2) {
@@ -23,6 +23,12 @@ Color operator*(Color const &c1, Color const &c2) {
                  c1.blue() * c2.blue());
 
 }
+
+//bool operator==(Color const &c1, Color const &c2) {
+//    return (c1.red() == c2.red()
+//    and c1.blue() == c2.blue()
+//    and c1.green() == c2.green());
+//}
 
 Color Color::to_clamped_rgb() const {
     int red = fmax(0, fmin(255, ceil(this->red() * 255)));
