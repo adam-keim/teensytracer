@@ -226,7 +226,6 @@ TEST_CASE("Inversion") {
            7 , 0 , 5 , 4 ,
            6 , -2 , 0 , 5;
         auto c = a * b;
-        std::cout << c * b.inverse();
         CHECK((c * b.inverse()).isApprox(a));
     }
 }
