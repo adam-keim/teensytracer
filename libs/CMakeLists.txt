@@ -14,10 +14,12 @@ set(WIRE_SOURCE_FILES
 add_library(Wire STATIC ${WIRE_SOURCE_FILES})
 target_include_directories(Wire PUBLIC Wire)
 
-set(SOURCE_FILES
-        TFT_ILI93XX/TFT_ILI93XX.cpp
-            )
 
-add_library(oled STATIC ${SOURCE_FILES})
-target_include_directories(oled PUBLIC TFT_ILI93XX TFT_ILI93XX/_includes)
+set(TFT_SOURCE_FILES
+        ILI9341_t3/ILI9341_t3.cpp
+        ILI9341_t3/glcdfont.c
+        )
+add_library(oled STATIC ${TFT_SOURCE_FILES})
+target_include_directories(oled PUBLIC ILI9341_t3)
+
 target_link_libraries(oled SPI Wire)
