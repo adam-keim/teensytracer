@@ -7,14 +7,21 @@
 #include "tuple.h"
 #include "ray.h"
 #include <vector>
+#include <Eigen/Dense>
 
 class Sphere {
 public:
     Sphere() {
         origin = Point(0,0,0);
         radius = 1;
+        transform = Eigen::Matrix4f::Identity();
     };
-    std::vector<float> intersect(Ray ray);
+    std::vector<Intersection> intersect(Ray ray);
+    Eigen::Matrix4f transform;
+    void set_transform(Eigen::Matrix4f t) {
+        this->transform *= t;
+    }
+    Tuple normal_at(Tuple w_p) const;
 private:
     Tuple origin;
     float radius;

@@ -3,7 +3,8 @@ set(SOURCE_FILES
         color.cpp
         canvas.cpp
         ray.cpp
-        shapes.cpp)
+        shapes.cpp
+        matrix_helper.cpp)
 
 add_library(raytracer_lib STATIC ${SOURCE_FILES})
 target_include_directories(raytracer_lib PUBLIC include)

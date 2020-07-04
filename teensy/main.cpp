@@ -18,6 +18,7 @@
 #include <ILI9341_t3.h>
 #include "include/tuple.h"
 #include "include/color.h"
+#include "include/shapes.h"
 #include <Eigen/Dense>
 
 
@@ -34,61 +35,46 @@ uint8_t errorCode = 0;
 
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_CLK, TFT_MISO);
 
-struct Projectile {
-    Projectile(Tuple const &pos, Tuple const &vel) : m_position(pos), m_velocity(vel) {
-    }
 
-    Tuple m_position;
-    Tuple m_velocity;
-};
 
-struct Environment {
-    Environment(Tuple const &gravity, Tuple const &wind) : m_gravity(gravity), m_wind(wind) {
-    }
-
-    Tuple m_gravity;
-    Tuple m_wind;
-
-};
-
-void tick(Environment const &env, Projectile &proj) {
-    proj.m_position = proj.m_position + proj.m_velocity;
-    proj.m_velocity = proj.m_velocity + env.m_gravity + env.m_wind;
-}
-
+int x_width = 240;
+int y_height = 240;
+float loops = 0.0;
+auto color = ILI9341_CYAN;
+auto s = Sphere();
+auto ray_origin = Point(0,0,-5);
+float wall_z = 10;
+float wall_size = 7.0;
+float pixel_size = wall_size / x_width;
+float half = wall_size / 2;
 
 void setup() {
     pinMode(6, OUTPUT);
     digitalWriteFast(6, LOW);
     Serial.begin(38400);
+    delay(1000);
     tft.begin();
     tft.fillScreen(ILI9341_BLACK);
     digitalWriteFast(6, HIGH);
+    for(int y = 0; y < y_height; y++) {
+        float world_y = half - pixel_size * y;
+        for(int x = 0; x < x_width; x++) {
+//            Serial.print(x);
+//            Serial.print(" ");
+//            Serial.println(y);
+            float world_x = -half + pixel_size * x;
+            auto position = Point(world_x, world_y, wall_z);
+            auto r = Ray(ray_origin, (position - ray_origin).normalized());
+            auto xs = s.intersect(r);
+            auto ray_hit = hit(xs);
+            if(not ray_hit.isBlank) {
+                tft.drawPixel(x, y, color);
+            }
+        }
+
+    }
 
 }
-float loops = 0.0;
-auto color = ILI9341_GREEN;
 void loop(void) {
-    Tuple start = Point(20, 20, 0);
-    Tuple vel = Vector(.7, max(4 - loops, 0), 0).normalized() * 6;
-    Projectile p = Projectile(start, vel);
-    Environment e = Environment(Vector(0, -.1, 0), Vector(-.01, 0, 0));
-    if(loops <= 100.0) {
-        do {
-            tick(e, p);
-            tft.drawPixel(int(p.m_position.x()), int(320 - p.m_position.y()), color);
-            // Plot as 3x3 squares centered at pos
-            tft.drawPixel(int(p.m_position.x() - 1), int(320 - p.m_position.y() - 1), color);
-            tft.drawPixel(int(p.m_position.x()), int(320 - p.m_position.y() - 1), color);
-            tft.drawPixel(int(p.m_position.x() + 1), int(320 - p.m_position.y() - 1), color);
-            tft.drawPixel(int(p.m_position.x() - 1), int(320 - p.m_position.y()), color);
-            tft.drawPixel(int(p.m_position.x()), int(320 - p.m_position.y()), color);
-            tft.drawPixel(int(p.m_position.x() + 1), int(320 - p.m_position.y()), color);
-            tft.drawPixel(int(p.m_position.x() - 1), int(320 - p.m_position.y() + 1), color);
-            tft.drawPixel(int(p.m_position.x()), int(320 - p.m_position.y() + 1), color);
-            tft.drawPixel(int(p.m_position.x() + 1), int(320 - p.m_position.y() + 1), color);
-        } while (p.m_position.y() > 0);
-    }
-    loops += .15;
 
 }
