@@ -28,14 +28,17 @@ public:
 
     void WritePixel(int x, int y, Color const &color);
 
-    friend std::ostream &operator<<(std::ostream& os, const Canvas &c) {
+    friend std::ostream &operator<<(std::ostream &os, const Canvas &c) {
         c.WritePPMHeader(os);
         c.WritePPMPixels(os);
         return os;
     }
+
 protected:
-    void WritePPMHeader(std::ostream& out) const;
-    void WritePPMPixels(std::ostream& out) const;
+    void WritePPMHeader(std::ostream &out) const;
+
+    void WritePPMPixels(std::ostream &out) const;
+
 private:
     int m_width;
     int m_height;

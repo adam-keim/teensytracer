@@ -14,17 +14,17 @@ Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normal
     Tuple lightv = (light.position - point).normalized();
 
     Color c_ambient = effective_color * this->ambient;
-    Color c_diffuse = Color(0,0,0);
-    Color c_specular = Color(0,0,0);
+    Color c_diffuse = Color(0, 0, 0);
+    Color c_specular = Color(0, 0, 0);
 
     float light_dot_normal = lightv.dot(normalv);
-    if(light_dot_normal >= 0) {
+    if (light_dot_normal >= 0) {
         c_diffuse = effective_color * this->diffuse * light_dot_normal;
         Tuple neg_light_v = -lightv;
         Tuple reflectv = neg_light_v.reflect(normalv);
         float reflect_dot_eye = reflectv.dot(eyev);
-        if(reflect_dot_eye <= 0) {
-            c_specular = Color(0,0,0);
+        if (reflect_dot_eye <= 0) {
+            c_specular = Color(0, 0, 0);
         } else {
             float factor = pow(reflect_dot_eye, this->shininess);
             c_specular = light.intensity * this->specular * factor;

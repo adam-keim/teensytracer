@@ -21,6 +21,7 @@ public:
 
 
     Tuple position(float t);
+
     Ray transform(Eigen::Matrix4f t);
 };
 

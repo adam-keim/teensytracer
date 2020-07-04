@@ -8,8 +8,8 @@
 
 TEST_CASE("Creating a light") {
     SECTION("A point light has position and intensity") {
-        Color intensity = Color(1,1,1);
-        Tuple position = Point(0,0,0);
+        Color intensity = Color(1, 1, 1);
+        Tuple position = Point(0, 0, 0);
         PointLight l = PointLight(position, intensity);
         CHECK(l.position == position);
         CHECK(l.intensity == intensity);

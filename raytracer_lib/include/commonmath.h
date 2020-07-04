@@ -3,6 +3,7 @@
 //
 
 #ifndef TEENSYTRACER_COMMONMATH_H
+
 int num_width(int num) {
     int digits = 0;
     while (num) {
@@ -11,6 +12,7 @@ int num_width(int num) {
     }
     return digits;
 }
+
 #define TEENSYTRACER_COMMONMATH_H
 
 #endif //TEENSYTRACER_COMMONMATH_H

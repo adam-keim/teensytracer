@@ -4,6 +4,7 @@
 
 #ifndef TEENSYTRACER_LIGHT_H
 #define TEENSYTRACER_LIGHT_H
+
 #include "tuple.h"
 #include "color.h"
 
@@ -15,7 +16,7 @@ public:
     Color intensity;
 
     friend bool operator==(PointLight const &c1, PointLight const &c2) {
-        return(c1.intensity == c2.intensity and c1.position == c2.position);
+        return (c1.intensity == c2.intensity and c1.position == c2.position);
     }
 
 };

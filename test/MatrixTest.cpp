@@ -217,14 +217,14 @@ TEST_CASE("Inversion") {
     }SECTION("Multiplication by inverse") {
 
         Eigen::Matrix4f a, b;
-        a << 3 , -9 , 7 , 3 ,
-           3 , -8 , 2 , -9 ,
-           -4 , 4 , 4 , 1 ,
-           -6 , 5 , -1 , 1;
-        b << 8 , 2 , 2 , 2 ,
-           3 , -1 , 7 , 0 ,
-           7 , 0 , 5 , 4 ,
-           6 , -2 , 0 , 5;
+        a << 3, -9, 7, 3,
+                3, -8, 2, -9,
+                -4, 4, 4, 1,
+                -6, 5, -1, 1;
+        b << 8, 2, 2, 2,
+                3, -1, 7, 0,
+                7, 0, 5, 4,
+                6, -2, 0, 5;
         auto c = a * b;
         CHECK((c * b.inverse()).isApprox(a));
     }

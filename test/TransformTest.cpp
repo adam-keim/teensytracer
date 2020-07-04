@@ -69,38 +69,35 @@ TEST_CASE("Rotation") {
         CHECK((full_quarter * p).isApprox(Point(-1, 0, 0)));
     }
 }
+
 TEST_CASE("Shearing") {
     SECTION("A shearing transformation moves x in proportion to y") {
         auto transform = Shearing(1, 0, 0, 0, 0, 0);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(5, 3, 4));
-    }
-    SECTION("A shearing transformation moves x in proportion to z") {
+    }SECTION("A shearing transformation moves x in proportion to z") {
         auto transform = Shearing(0, 1, 0, 0, 0, 0);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(6, 3, 4));
-    }
-    SECTION("A shearing transformation moves y in proportion to x") {
+    }SECTION("A shearing transformation moves y in proportion to x") {
         auto transform = Shearing(0, 0, 1, 0, 0, 0);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(2, 5, 4));
-    }
-    SECTION("A shearing transformation moves y in proportion to z") {
+    }SECTION("A shearing transformation moves y in proportion to z") {
         auto transform = Shearing(0, 0, 0, 1, 0, 0);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(2, 7, 4));
-    }
-    SECTION("A shearing transformation moves z in proportion to x") {
+    }SECTION("A shearing transformation moves z in proportion to x") {
         auto transform = Shearing(0, 0, 0, 0, 1, 0);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(2, 3, 6));
-    }
-    SECTION("A shearing transformation moves z in proportion to y") {
+    }SECTION("A shearing transformation moves z in proportion to y") {
         auto transform = Shearing(0, 0, 0, 0, 0, 1);
         auto p = Point(2, 3, 4);
         CHECK((transform * p) == Point(2, 3, 7));
     }
 }
+
 TEST_CASE("Sequencing Transforms") {
     SECTION("Applying transforms in sequence") {
         auto p = Point(1, 0, 1);
@@ -116,14 +113,13 @@ TEST_CASE("Sequencing Transforms") {
 
         auto p4 = c * p3;
         CHECK(p4.isApprox(Point(15, 0, 7)));
-    }
-    SECTION("Chained transformations must be applied in reverse order") {
-        auto p = Point(1,0,1);
+    }SECTION("Chained transformations must be applied in reverse order") {
+        auto p = Point(1, 0, 1);
         auto a = Rotation_X(M_PI / 2);
         auto b = Scaling(5, 5, 5);
         auto c = Translation(10, 5, 7);
         auto t = c * b * a;
-        CHECK((t * p).isApprox(Point(15,0,7)));
+        CHECK((t * p).isApprox(Point(15, 0, 7)));
     }
 
 }

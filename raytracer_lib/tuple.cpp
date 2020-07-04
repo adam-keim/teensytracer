@@ -6,11 +6,11 @@
 #include "math.h"
 
 
-bool Tuple::IsPoint() const{
+bool Tuple::IsPoint() const {
     return this->w() == 1.0;
 }
 
-bool Tuple::IsVector() const{
+bool Tuple::IsVector() const {
     return this->w() == 0.0;
 }
 

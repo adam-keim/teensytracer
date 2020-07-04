@@ -8,7 +8,7 @@
 Canvas::Canvas(int width, int height)
         : m_height(height),
           m_width(width),
-    m_pixels(width, std::vector<Color>(height, Color(0,0,0))) {
+          m_pixels(width, std::vector<Color>(height, Color(0, 0, 0))) {
 }
 
 Canvas::~Canvas() {
@@ -27,7 +27,7 @@ void Canvas::WritePPMHeader(std::ostream &out) const {
 
 void Canvas::WritePPMPixels(std::ostream &out) const {
     int linewidth = 0;
-    for (size_t y = 0; y < m_height; y ++) {
+    for (size_t y = 0; y < m_height; y++) {
         bool first = true;
         for (size_t x = 0; x < m_width; x++) {
             Color c = this->PixelAt(x, y).to_clamped_rgb();

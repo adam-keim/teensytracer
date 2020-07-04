@@ -26,29 +26,25 @@ TEST_CASE("Lighting a material") {
         auto light = PointLight(Point(0, 0, -10), Color(1, 1, 1));
         Color result = m.lighting(light, pos, eyev, normalv);
         CHECK(result == Color(1.9, 1.9, 1.9));
-    }
-    SECTION("Lighting with the eye between light and surface, eye offset 45°") {
+    }SECTION("Lighting with the eye between light and surface, eye offset 45°") {
         auto eyev = Vector(0, sqrt(2) / 2, -sqrt(2) / 2);
         auto normalv = Vector(0, 0, -1);
         auto light = PointLight(Point(0, 0, -10), Color(1, 1, 1));
         auto result = m.lighting(light, pos, eyev, normalv);
         CHECK(result == Color(1.0, 1.0, 1.0));
-    }
-    SECTION("Lighting with eye opposite surface, light offset 45°") {
+    }SECTION("Lighting with eye opposite surface, light offset 45°") {
         auto eyev = Vector(0, 0, -1);
         auto normalv = Vector(0, 0, -1);
         auto light = PointLight(Point(0, 10, -10), Color(1, 1, 1));
         auto result = m.lighting(light, pos, eyev, normalv);
         CHECK(result.isApprox(Color(0.7364, 0.7364, 0.7364)));
-    }
-    SECTION("Lighting with eye in the path of the reflection vector") {
+    }SECTION("Lighting with eye in the path of the reflection vector") {
         auto eyev = Vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
         auto normalv = Vector(0, 0, -1);
         auto light = PointLight(Point(0, 10, -10), Color(1, 1, 1));
         auto result = m.lighting(light, pos, eyev, normalv);
         CHECK(result.isApprox(Color(1.6364, 1.6364, 1.6364)));
-    }
-    SECTION("Lighting with the light behind the surface") {
+    }SECTION("Lighting with the light behind the surface") {
         auto eyev = Vector(0, 0, -1);
         auto normalv = Vector(0, 0, -1);
         auto light = PointLight(Point(0, 0, 10), Color(1, 1, 1));

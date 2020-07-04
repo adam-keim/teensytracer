@@ -31,3 +31,7 @@ void World::setLight(PointLight light) {
 void World::addObject(Sphere obj) {
     this->objects.push_back(obj);
 }
+
+std::vector<Intersection> World::intersect_world(Ray ray) {
+    return std::vector<Intersection>();
+}

@@ -4,6 +4,8 @@
 
 #include "catch.hpp"
 #include "include/world.h"
+#include "include/ray.h"
+#include "include/tuple.h"
 #include "include/matrix_helper.h"
 
 TEST_CASE("Basic world operations") {
@@ -25,6 +27,14 @@ TEST_CASE("Basic world operations") {
        CHECK(w.objects[0] == s1);
        CHECK(w.objects[1] == s2);
 
+    }SECTION("Intersect a world with a ray"){
+        auto w = World::DefaultWorld();
+        Ray r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
+        xs = w.intersect_world(r);
+        CHECK(xs.size() == 4)
+        And xs[0].t = 4
+        And xs[1].t = 4.5
+        And xs[2].t = 5.5
+        And xs[3].t = 6
     }
-
 }

@@ -14,8 +14,7 @@ TEST_CASE("Tracking Intersections") {
         auto i = Intersection(3.5, &s);
         CHECK(i.t == 3.5);
         CHECK(i.object == &s);
-    }
-    SECTION("Aggregating Intersections") {
+    }SECTION("Aggregating Intersections") {
         auto s = Sphere();
         auto i1 = Intersection(1, &s);
         auto i2 = Intersection(2, &s);
@@ -26,6 +25,7 @@ TEST_CASE("Tracking Intersections") {
     }
 
 }
+
 TEST_CASE("Finding the hit") {
     SECTION("The hit, when all intersections have positive t") {
         auto s = Sphere();
@@ -34,8 +34,7 @@ TEST_CASE("Finding the hit") {
         std::vector<Intersection> xs{i2, i1};
         auto i = hit(xs);
         CHECK(i == i1);
-    }
-    SECTION("The hit, when some intersections have negative t") {
+    }SECTION("The hit, when some intersections have negative t") {
         auto s = Sphere();
         auto i1 = Intersection(-1, &s);
         auto i2 = Intersection(2, &s);
@@ -51,8 +50,7 @@ TEST_CASE("Finding the hit") {
         std::vector<Intersection> xs{i2, i1};
         auto i = hit(xs);
         CHECK(i.isBlank);
-    }
-    SECTION("The hit is always the lowest nonnegative intersection") {
+    }SECTION("The hit is always the lowest nonnegative intersection") {
         auto s = Sphere();
         auto i1 = Intersection(5, &s);
         auto i2 = Intersection(7, &s);

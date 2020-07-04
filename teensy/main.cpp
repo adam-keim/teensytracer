@@ -38,23 +38,23 @@ uint8_t errorCode = 0;
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_CLK, TFT_MISO);
 
 
-
 int x_width = 240;
 int y_height = 240;
 float loops = 0.0;
 auto color = ILI9341_CYAN;
 auto s = Sphere();
-auto ray_origin = Point(0,0,-5);
+auto ray_origin = Point(0, 0, -5);
 float wall_z = 10;
 float wall_size = 7.0;
 float pixel_size = wall_size / x_width;
 float half = wall_size / 2;
 auto light_position = Point(-10, 10, -10);
-auto light_color = Color(1,1,1);
+auto light_color = Color(1, 1, 1);
 auto light = PointLight(light_position, light_color);
 
-auto t1 = Shearing(1,0,0,0,0,0);
+auto t1 = Shearing(1, 0, 0, 0, 0, 0);
 auto t2 = Scaling(.7, 1, 1);
+
 void setup() {
     s.material.color = Color(.2, 1, .2);
     s.material.specular = .2;
@@ -67,9 +67,9 @@ void setup() {
     tft.begin();
     tft.fillScreen(ILI9341_BLACK);
     digitalWriteFast(6, HIGH);
-    for(int y = 0; y < y_height; y++) {
+    for (int y = 0; y < y_height; y++) {
         float world_y = half - pixel_size * y;
-        for(int x = 0; x < x_width; x++) {
+        for (int x = 0; x < x_width; x++) {
 //            Serial.print(x);
 //            Serial.print(" ");
 //            Serial.println(y);
@@ -78,7 +78,7 @@ void setup() {
             auto r = Ray(ray_origin, (position - ray_origin).normalized());
             auto xs = s.intersect(r);
             auto ray_hit = hit(xs);
-            if(not ray_hit.isBlank) {
+            if (not ray_hit.isBlank) {
                 auto point = r.position(ray_hit.t);
                 auto normal = ray_hit.object->normal_at(point);
                 auto eyev = -r.direction;
@@ -92,6 +92,7 @@ void setup() {
     }
 
 }
+
 void loop(void) {
 
 }

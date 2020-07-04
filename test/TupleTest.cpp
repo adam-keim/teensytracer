@@ -6,6 +6,7 @@
 
 #include "catch.hpp"
 #include "include/tuple.h"
+
 TEST_CASE("Tuple Creation") {
     SECTION("Point Tuple") {
         Tuple t = Tuple(4.3, -4.2, 3.1, 1.0);
@@ -106,13 +107,14 @@ TEST_CASE("Tuple advanced operations") {
         Tuple b = Vector(2, 3, 4);
         CHECK(equal(a.dot(b), 20));
     }SECTION("Cross Product") {
-        Tuple a = Vector(1,2,3);
-        Tuple b = Vector(2,3,4);
+        Tuple a = Vector(1, 2, 3);
+        Tuple b = Vector(2, 3, 4);
         auto v = a.cross3(b);
         CHECK(v.isApprox(Vector(-1, 2, -1), EPSILON));
         CHECK(b.cross3(a).isApprox(Vector(1, -2, 1)));
     }
 }
+
 TEST_CASE("Reflecting a vactor") {
     SECTION("Reflecting a vector approaching at 45") {
         auto v = Vector(1, -1, 0);
@@ -121,7 +123,7 @@ TEST_CASE("Reflecting a vactor") {
         CHECK(r == Vector(1, 1, 0));
     }SECTION("Reflecting a vector off a slanted surface") {
         auto v = Vector(0, -1, 0);
-        auto n = Vector(sqrt(2)/2, sqrt(2)/2, 0);
+        auto n = Vector(sqrt(2) / 2, sqrt(2) / 2, 0);
         auto r = v.reflect(n);
         CHECK(r.isApprox(Vector(1, 0, 0)));
     }

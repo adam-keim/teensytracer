@@ -14,8 +14,7 @@ class Material {
 public:
     Material(Color color = Color(1, 1, 1), float ambient = .1, float diffuse = .9, float specular = .9,
              float shininess = 200) : color(color),
-             ambient(ambient), diffuse(diffuse), specular(specular), shininess(shininess)
-             {};
+                                      ambient(ambient), diffuse(diffuse), specular(specular), shininess(shininess) {};
 
     Color color;
     float ambient;
