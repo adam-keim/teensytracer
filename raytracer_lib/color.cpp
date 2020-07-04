@@ -48,8 +48,3 @@ Color Color::to_rgb() const {
     return Color(this->red() * 255, this->green() * 255, this->blue() * 255);
 }
 
-uint16_t Color::to_tft_rgb() const {
-    Color clamped = this->to_clamped_rgb();
-
-}
-

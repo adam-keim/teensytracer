@@ -20,6 +20,7 @@ public:
     };
     Material material;
     std::vector<Intersection> intersect(Ray ray);
+    friend bool operator==(Sphere const &, Sphere const &);
     Eigen::Matrix4f transform;
     void set_transform(Eigen::Matrix4f t) {
         this->transform *= t;

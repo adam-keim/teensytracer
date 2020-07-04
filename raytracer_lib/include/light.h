@@ -14,6 +14,10 @@ public:
     Tuple position;
     Color intensity;
 
+    friend bool operator==(PointLight const &c1, PointLight const &c2) {
+        return(c1.intensity == c2.intensity and c1.position == c2.position);
+    }
+
 };
 
 

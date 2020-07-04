@@ -25,8 +25,6 @@ public:
 
     Color to_clamped_rgb() const;
 
-    uint16_t to_tft_rgb() const;
-
 };
 
 

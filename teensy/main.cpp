@@ -53,13 +53,13 @@ auto light_position = Point(-10, 10, -10);
 auto light_color = Color(1,1,1);
 auto light = PointLight(light_position, light_color);
 
-//auto t1 = Shearing(1,0,0,0,0,0);
-//auto t2 = Scaling(.5, 1, 1);
+auto t1 = Shearing(1,0,0,0,0,0);
+auto t2 = Scaling(.7, 1, 1);
 void setup() {
     s.material.color = Color(.2, 1, .2);
     s.material.specular = .2;
-//    s.set_transform(t1);
-//    s.set_transform(t2);
+    s.set_transform(t1);
+    s.set_transform(t2);
     pinMode(6, OUTPUT);
     digitalWriteFast(6, LOW);
     Serial.begin(38400);
