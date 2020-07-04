@@ -24,6 +24,13 @@ Color operator*(Color const &c1, Color const &c2) {
 
 }
 
+Color operator*(Color const &c, float const &f) {
+    return Color(c.red() * f, c.green() * f, c.blue() * f);
+}
+
+Color operator+(Color const &c1, Color const &c2) {
+    return Color(c1.red() + c2.red(), c1.green() + c2.green(), c1.blue() + c2.blue());
+}
 //bool operator==(Color const &c1, Color const &c2) {
 //    return (c1.red() == c2.red()
 //    and c1.blue() == c2.blue()
@@ -39,5 +46,10 @@ Color Color::to_clamped_rgb() const {
 
 Color Color::to_rgb() const {
     return Color(this->red() * 255, this->green() * 255, this->blue() * 255);
+}
+
+uint16_t Color::to_tft_rgb() const {
+    Color clamped = this->to_clamped_rgb();
+
 }
 

@@ -19,6 +19,8 @@
 #include "include/tuple.h"
 #include "include/color.h"
 #include "include/shapes.h"
+#include "include/light.h"
+#include "include/matrix_helper.h"
 #include <Eigen/Dense>
 
 
@@ -47,8 +49,17 @@ float wall_z = 10;
 float wall_size = 7.0;
 float pixel_size = wall_size / x_width;
 float half = wall_size / 2;
+auto light_position = Point(-10, 10, -10);
+auto light_color = Color(1,1,1);
+auto light = PointLight(light_position, light_color);
 
+//auto t1 = Shearing(1,0,0,0,0,0);
+//auto t2 = Scaling(.5, 1, 1);
 void setup() {
+    s.material.color = Color(.2, 1, .2);
+    s.material.specular = .2;
+//    s.set_transform(t1);
+//    s.set_transform(t2);
     pinMode(6, OUTPUT);
     digitalWriteFast(6, LOW);
     Serial.begin(38400);
@@ -68,7 +79,13 @@ void setup() {
             auto xs = s.intersect(r);
             auto ray_hit = hit(xs);
             if(not ray_hit.isBlank) {
-                tft.drawPixel(x, y, color);
+                auto point = r.position(ray_hit.t);
+                auto normal = ray_hit.object->normal_at(point);
+                auto eyev = -r.direction;
+                Color color = s.material.lighting(light, point, eyev, normal);
+                Color clamped = color.to_clamped_rgb();
+                tft.drawPixel(x, y, tft.color565(clamped.red(), clamped.green(), clamped.blue()));
+
             }
         }
 

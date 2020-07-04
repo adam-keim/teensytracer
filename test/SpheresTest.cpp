@@ -119,3 +119,16 @@ TEST_CASE("Computing the normal on a sphere") {
         CHECK(n.isApprox(Vector(0, 0.97014, -0.24254)));
     }
 }
+TEST_CASE("Sphere Materials") {
+    SECTION("A sphere has a default material") {
+        auto s = Sphere();
+        auto m = s.material;
+        CHECK(m == Material());
+    }SECTION("A sphere can be assigned a material") {
+        auto s = Sphere();
+        auto m = Material();
+        m.ambient = 1;
+        s.set_material(m);
+        CHECK(s.material == m);
+    }
+}

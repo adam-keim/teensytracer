@@ -26,3 +26,7 @@ Tuple Vector(float x, float y, float z) {
 bool equal(float a, float b) {
     return (fabs(a - b) < EPSILON);
 }
+
+Tuple Tuple::reflect(Tuple n) const {
+    return (*this - n * 2 * this->dot(n));
+}

@@ -18,10 +18,14 @@ public:
     float blue() const;
 
     friend Color operator*(Color const &, Color const &);
+    friend Color operator*(Color const &, float const &);
+    friend Color operator+(Color const &, Color const &);
     //friend bool operator==(Color const &, Color const &);
     Color to_rgb() const;
 
     Color to_clamped_rgb() const;
+
+    uint16_t to_tft_rgb() const;
 
 };
 

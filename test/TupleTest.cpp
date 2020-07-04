@@ -113,3 +113,16 @@ TEST_CASE("Tuple advanced operations") {
         CHECK(b.cross3(a).isApprox(Vector(1, -2, 1)));
     }
 }
+TEST_CASE("Reflecting a vactor") {
+    SECTION("Reflecting a vector approaching at 45") {
+        auto v = Vector(1, -1, 0);
+        auto n = Vector(0, 1, 0);
+        auto r = v.reflect(n);
+        CHECK(r == Vector(1, 1, 0));
+    }SECTION("Reflecting a vector off a slanted surface") {
+        auto v = Vector(0, -1, 0);
+        auto n = Vector(sqrt(2)/2, sqrt(2)/2, 0);
+        auto r = v.reflect(n);
+        CHECK(r.isApprox(Vector(1, 0, 0)));
+    }
+}

@@ -6,7 +6,9 @@ add_executable(raytracer_test
         TransformTest.cpp
         RaysTest.cpp
         SpheresTest.cpp
-        IntersectionTest.cpp)
+        IntersectionTest.cpp
+        LightsTest.cpp
+        MaterialsTest.cpp)
 
 
 target_link_libraries(raytracer_test raytracer_lib)

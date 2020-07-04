@@ -24,7 +24,7 @@ TEST_CASE("Color Operations") {
         CHECK((c1 - c2).isApprox(Color(0.2, 0.5, 0.5)));
     }SECTION("Color * Scalar") {
         Color c = Color(0.2, 0.3, 0.4);
-        CHECK(c * 2 == Color(0.4, 0.6, 0.8));
+        CHECK(c * 2.0f == Color(0.4, 0.6, 0.8));
 
     }SECTION("Multiplying Colors") {
         Color c1 = Color(1, 0.2, 0.4);
