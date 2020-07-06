@@ -123,3 +123,36 @@ TEST_CASE("Sequencing Transforms") {
     }
 
 }
+
+TEST_CASE("View Transformations") {
+    SECTION("The transformation matrix for the default orientation") {
+        auto from = Point(0, 0, 0);
+        auto to = Point(0, 0, -1);
+        auto up = Vector(0, 1, 0);
+        auto t = ViewTransform(from, to, up);
+        CHECK(t == Eigen::Matrix4f::Identity());
+    }SECTION("A view transformation matrix looking in positive z direction") {
+        auto from = Point(0, 0, 0);
+        auto to = Point(0, 0, 1);
+        auto up = Vector(0, 1, 0);
+        auto t = ViewTransform(from, to, up);
+        CHECK(t == Scaling(-1, 1, -1));
+    }SECTION("The view transformation moves the world") {
+        auto from = Point(0, 0, 8);
+        auto to = Point(0, 0, 0);
+        auto up = Vector(0, 1, 0);
+        auto t = ViewTransform(from, to, up);
+        CHECK(t == Translation(0, 0, -8));
+    }SECTION("An arbitrary view transformation") {
+        auto from = Point(1, 3, 2);
+        auto to = Point(4, -2, 8);
+        auto up = Vector(1, 1, 0);
+        auto t = ViewTransform(from, to, up);
+        Eigen::Matrix4f t_exp;
+        t_exp << -0.50709, 0.50709, 0.67612, -2.36643,
+                0.76772, 0.60609, 0.12122, -2.82843,
+                -0.35857, 0.59761, -0.71714, 0.00000,
+                0.00000, 0.00000, 0.00000, 1.00000;
+        CHECK(t.isApprox(t_exp));
+    }
+}

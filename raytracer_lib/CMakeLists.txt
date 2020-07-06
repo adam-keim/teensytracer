@@ -7,7 +7,8 @@ set(SOURCE_FILES
         matrix_helper.cpp
         light.cpp
         material.cpp
-        world.cpp)
+        world.cpp
+        camera.cpp)
 
 add_library(raytracer_lib STATIC ${SOURCE_FILES})
 target_include_directories(raytracer_lib PUBLIC include)

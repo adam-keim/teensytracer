@@ -3,7 +3,7 @@
 //
 
 #include "include/tuple.h"
-#include "math.h"
+#include "cmath"
 
 
 bool Tuple::IsPoint() const {

@@ -21,6 +21,8 @@
 #include "include/shapes.h"
 #include "include/light.h"
 #include "include/matrix_helper.h"
+#include "include/world.h"
+#include "include/camera.h"
 #include <Eigen/Dense>
 
 
@@ -38,61 +40,83 @@ uint8_t errorCode = 0;
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_CLK, TFT_MISO);
 
 
-int x_width = 240;
+int x_width = 320;
 int y_height = 240;
-float loops = 0.0;
-auto color = ILI9341_CYAN;
-auto s = Sphere();
-auto ray_origin = Point(0, 0, -5);
-float wall_z = 10;
-float wall_size = 7.0;
-float pixel_size = wall_size / x_width;
-float half = wall_size / 2;
-auto light_position = Point(-10, 10, -10);
-auto light_color = Color(1, 1, 1);
-auto light = PointLight(light_position, light_color);
 
-auto t1 = Shearing(1, 0, 0, 0, 0, 0);
-auto t2 = Scaling(.7, 1, 1);
 
+World w = World();
+Camera c = Camera(x_width, y_height, M_PI / 3);
 void setup() {
-    s.material.color = Color(.2, 1, .2);
-    s.material.specular = .2;
-    s.set_transform(t1);
-    s.set_transform(t2);
     pinMode(6, OUTPUT);
     digitalWriteFast(6, LOW);
-    Serial.begin(38400);
-    delay(1000);
     tft.begin();
     tft.fillScreen(ILI9341_BLACK);
     digitalWriteFast(6, HIGH);
-    for (int y = 0; y < y_height; y++) {
-        float world_y = half - pixel_size * y;
-        for (int x = 0; x < x_width; x++) {
-//            Serial.print(x);
-//            Serial.print(" ");
-//            Serial.println(y);
-            float world_x = -half + pixel_size * x;
-            auto position = Point(world_x, world_y, wall_z);
-            auto r = Ray(ray_origin, (position - ray_origin).normalized());
-            auto xs = s.intersect(r);
-            auto ray_hit = hit(xs);
-            if (not ray_hit.isBlank) {
-                auto point = r.position(ray_hit.t);
-                auto normal = ray_hit.object->normal_at(point);
-                auto eyev = -r.direction;
-                Color color = s.material.lighting(light, point, eyev, normal);
-                Color clamped = color.to_clamped_rgb();
-                tft.drawPixel(x, y, tft.color565(clamped.red(), clamped.green(), clamped.blue()));
+    w.light = PointLight(Point(-10, 10, -10), Color(1, 1, 1));
 
-            }
-        }
+    Sphere floor_sphere = Sphere();
+    floor_sphere.set_transform(Scaling(10, .01, 10));
+    floor_sphere.material = Material();
+    floor_sphere.material.color = Color(1, 0.9, 0.9);
+    floor_sphere.material.specular = 0;
+    w.addObject(floor_sphere);
 
-    }
+    auto left_wall = Sphere();
+    left_wall.transform = Translation(0, 0, 5) *
+                          Rotation_Y(-M_PI/4) * Rotation_X(M_PI/2) *
+                          Scaling(10, 0.01, 10);
+    left_wall.material = floor_sphere.material;
+    w.addObject(left_wall);
 
+
+    auto right_wall = Sphere();
+    right_wall.transform = Translation(0, 0, 5) *
+                          Rotation_Y(M_PI/4) * Rotation_X(M_PI/2) *
+                          Scaling(10, 0.01, 10);
+    right_wall.material = floor_sphere.material;
+    w.addObject(right_wall);
+
+    auto middle = Sphere();
+    middle.transform = Translation(-0.5, 1, 0.5);
+    middle.material = Material();
+    middle.material.color = Color(0.1, 1, 0.5);
+    middle.material.diffuse = 0.7;
+    middle.material.specular = 0.3;
+    w.addObject(middle);
+
+    auto right = Sphere();
+    right.transform = Translation(1.5, 0.5, -0.5) * Scaling(0.5, 0.5, 0.5);
+    right.material = Material();
+    right.material.color = Color(0.5, 1, 0.1);
+    right.material.diffuse = 0.7;
+    right.material.specular = 0.3;
+    w.addObject(right);
+
+
+    auto left = Sphere();
+    left.transform = Translation(-1.5, 0.33, -0.75) * Scaling(0.33, 0.33, 0.33);
+    left.material = Material();
+    left.material.color = Color(1, 0.8, 0.1);
+    left.material.diffuse = 0.7;
+    left.material.specular = 0.3;
+    w.addObject(left);
 }
+
+float loops = 0;
 
 void loop(void) {
 
+    c.transform = ViewTransform(Point(sin(loops), 1.5f + cos(loops), -5),
+                                Point(0, 1 , 0),
+                                Vector(0, 1, 0));
+
+    for(int y = 0; y < y_height; y++) {
+        for(int x = 0; x < x_width; x++) {
+            Ray ray = c.ray_for_pixel(x, y);
+            Color c_unclamped = w.color_at(ray);
+            Color c = c_unclamped.to_clamped_rgb();
+            tft.drawPixel(y, 320 - x, tft.color565(c.red(), c.green(), c.blue()));
+        }
+    }
+    loops += 1;
 }

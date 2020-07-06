@@ -11,6 +11,8 @@
 #include "color.h"
 #include <vector>
 
+class Color;
+struct Comps;
 class World {
 public:
     World() {
@@ -28,6 +30,10 @@ public:
     std::vector<Sphere> objects;
 
     std::vector<Intersection> intersect_world(Ray ray);
+
+    Color shade_hit(Comps comps);
+
+    Color color_at(Ray ray);
 };
 
 #endif //TEENSYTRACER_WORLD_H

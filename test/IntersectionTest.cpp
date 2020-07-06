@@ -61,3 +61,32 @@ TEST_CASE("Finding the hit") {
         CHECK(i == i4);
     }
 }
+
+TEST_CASE("Preparing computations") {
+    SECTION("Precomputing the state of an intersection") {
+        auto r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
+        Sphere shape = Sphere();
+        auto i = Intersection(4, &shape);
+        Comps comps = i.prepare_computations(r);
+        CHECK(comps.t == i.t);
+        CHECK(comps.object == i.object);
+        CHECK(comps.point == Point(0, 0, -1));
+        CHECK(comps.eyev == Vector(0, 0, -1));
+        CHECK(comps.normalv == Vector(0, 0, -1));
+    }SECTION("The hit, when an intersection occurs on the outside") {
+        auto r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
+        auto shape = Sphere();
+        auto i = Intersection(4, &shape);
+        Comps comps = i.prepare_computations(r);
+        CHECK(comps.inside == false);
+    }SECTION("The hit, when an intersection occurs on the inside") {
+        auto r = Ray(Point(0, 0, 0), Vector(0, 0, 1));
+        auto shape = Sphere();
+        auto i = Intersection(1, &shape);
+        Comps comps = i.prepare_computations(r);
+        CHECK(comps.point == Point(0, 0, 1));
+        CHECK(comps.eyev == Vector(0, 0, -1));
+        CHECK(comps.inside == true);
+        CHECK(comps.normalv == Vector(0, 0, -1));
+    }
+}

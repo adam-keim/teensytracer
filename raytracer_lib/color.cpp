@@ -3,7 +3,7 @@
 //
 
 #include "color.h"
-#include "math.h"
+#include "cmath"
 
 float Color::red() const {
     return this->x();

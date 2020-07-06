@@ -57,3 +57,17 @@ Eigen::Matrix4f Shearing(float x_y, float x_z, float y_x, float y_z, float z_x, 
             0, 0, 0, 1;
     return t;
 }
+
+Eigen::Matrix4f ViewTransform(Tuple from, Tuple to, Tuple up) {
+    Tuple forward = (to - from).normalized();
+    Tuple up_n = up.normalized();
+    Tuple left = forward.cross3(up_n);
+    Tuple true_up = left.cross3(forward);
+    Eigen::Matrix4f o;
+    o << left.x(), left.y(), left.z(), 0,
+            true_up.x(), true_up.y(), true_up.z(), 0,
+            -forward.x(), -forward.y(), -forward.z(), 0,
+            0, 0, 0, 1;
+    return o * Translation(-from.x(), -from.y(), -from.z());
+
+}

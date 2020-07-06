@@ -40,7 +40,7 @@ set(CMAKE_C_FLAGS "${BASE_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=gnu++14 -felide-constructors -fno-exceptions -fpermissive -fno-rtti -Wno-error=narrowing")
 
 
-set(LINKER_FLAGS "-Os -Wl,--gc-sections,--relax ${CPU_OPTIONS} -T${TEENSY_ROOT}/${MCU_LOWER}.ld")
+set(LINKER_FLAGS "-O3 -Wl,--gc-sections,--relax ${CPU_OPTIONS} -T${TEENSY_ROOT}/${MCU_LOWER}.ld")
 #set(LINKER_LIBS  "-larm_cortexM7lfsp_math -lm -lstdc++")
 set(LINKER_LIBS  "-lm -lstdc++")
 #set(LINKER_FLAGS "-Os -Wl,--gc-sections ${TARGET_FLAGS} -T${TEENSY_ROOT}/imxrt1062.ld" )
