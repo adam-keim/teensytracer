@@ -10,11 +10,12 @@
 #include <vector>
 #include <iostream>
 
-class Sphere;
+class Shape;
 struct Comps {
     float t;
-    Sphere *object;
+    Shape* object;
     Tuple point;
+    Tuple over_point;
     Tuple eyev;
     Tuple normalv;
     bool inside;
@@ -40,12 +41,12 @@ public:
         object = nullptr;
     };
 
-    Intersection(float t, Sphere *obj) : t(t) {
+    Intersection(float t, Shape* obj) : t(t) {
         object = obj;
         isBlank = false;
     };
 
-    Comps prepare_computations(Ray ray) const;
+    Comps prepare_computations(Ray &ray) const;
 
     friend bool operator==(const Intersection &a, const Intersection &b) {
         return(a.t == b.t and a.object == b.object);
@@ -54,7 +55,7 @@ public:
         return(a.t < b.t);
     }
     float t;
-    Sphere *object;
+    Shape* object;
     bool isBlank;
 };
 

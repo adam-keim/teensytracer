@@ -9,3 +9,7 @@ add_executable(
 )
 target_link_libraries(Canvas_Sample raytracer_lib)
 
+add_executable(
+        Scene_Sample ch7.cpp
+)
+target_link_libraries(Scene_Sample raytracer_lib)

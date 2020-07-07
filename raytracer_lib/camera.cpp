@@ -19,8 +19,8 @@ Camera::Camera(int hsize, int vsize, float fov) : hsize(hsize), vsize(vsize), fo
 }
 
 Ray Camera::ray_for_pixel(int x, int y) const {
-    float x_off = ((float)x + .5f) * this->pixel_size;
-    float y_off = ((float)y + .5f) * this->pixel_size;
+    const float x_off = ((float)x + .5f) * this->pixel_size;
+    const float y_off = ((float)y + .5f) * this->pixel_size;
     float world_x = this->half_width - x_off;
     float world_y = this->half_height - y_off;
     Tuple pixel = this->transform.inverse() * Point(world_x, world_y, -1);

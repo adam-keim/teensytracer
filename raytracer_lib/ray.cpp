@@ -24,19 +24,20 @@ Intersection hit(std::vector<Intersection> xs) {
     }
 }
 
-Comps Intersection::prepare_computations(Ray ray) const {
+Comps Intersection::prepare_computations(Ray &ray) const {
    Comps c;
    c.t = this->t;
-   c.object = this->object;
+   c.object = object;
    c.point = ray.position(c.t);
    c.eyev = -ray.direction;
-   c.normalv = this->object->normal_at(c.point);
+   c.normalv = object->normal_at(c.point);
    if(c.normalv.dot(c.eyev) < 0) {
        c.inside = true;
        c.normalv = -c.normalv;
    } else {
        c.inside = false;
    }
+   c.over_point = c.point + c.normalv * EPSILON;
    return c;
 
 }

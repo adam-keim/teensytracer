@@ -7,7 +7,9 @@
 
 #include <Eigen/Dense>
 
-#define EPSILON .001
+#ifndef EPSILON
+#define EPSILON .0015
+#endif //EPSILON
 
 bool equal(float a, float b);
 

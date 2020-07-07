@@ -58,7 +58,7 @@ TEST_CASE("Rendering the world with a camera") {
         auto up = Vector(0, 1, 0);
         c.transform = ViewTransform(from, to, up);
         auto image = c.render(w);
-
+        std::cout << image.PixelAt(5,5);
         CHECK(image.PixelAt(5, 5).isApprox(Color(0.38066, 0.47583, 0.2855)));
     }
 }

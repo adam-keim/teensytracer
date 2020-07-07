@@ -24,7 +24,7 @@ public:
 
     friend bool operator==(const Material &m1, const Material &m2);
 
-    Color lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv);
+    Color lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow = false);
 };
 
 

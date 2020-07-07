@@ -9,7 +9,7 @@ bool operator==(const Material &m1, const Material &m2) {
             m1.specular == m2.specular and m1.shininess == m2.shininess);
 }
 
-Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv) {
+Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow) {
     Color effective_color = this->color * light.intensity;
     Tuple lightv = (light.position - point).normalized();
 
@@ -18,7 +18,7 @@ Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normal
     Color c_specular = Color(0, 0, 0);
 
     float light_dot_normal = lightv.dot(normalv);
-    if (light_dot_normal >= 0) {
+    if (light_dot_normal >= 0 and !in_shadow) {
         c_diffuse = effective_color * this->diffuse * light_dot_normal;
         Tuple neg_light_v = -lightv;
         Tuple reflectv = neg_light_v.reflect(normalv);

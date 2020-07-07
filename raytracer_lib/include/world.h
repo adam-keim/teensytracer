@@ -10,6 +10,7 @@
 #include "tuple.h"
 #include "color.h"
 #include <vector>
+#include <memory>
 
 class Color;
 struct Comps;
@@ -25,15 +26,17 @@ public:
 
     void setLight(PointLight light);
 
-    void addObject(Sphere obj);
+    void addObject(std::unique_ptr<Shape> &obj);
 
-    std::vector<Sphere> objects;
+    std::vector<std::unique_ptr<Shape>> objects;
 
     std::vector<Intersection> intersect_world(Ray ray);
 
     Color shade_hit(Comps comps);
 
     Color color_at(Ray ray);
+
+    bool is_shadowed(Tuple point);
 };
 
 #endif //TEENSYTRACER_WORLD_H
