@@ -25,7 +25,7 @@ public:
 
     Ray ray_for_pixel(int x, int y) const;
 
-    Canvas render(World world) const;
+    Canvas render(World &world) const;
 };
 
 

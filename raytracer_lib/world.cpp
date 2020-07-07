@@ -15,11 +15,11 @@ World World::DefaultWorld() {
     s1->material.color = Color(.8, 1.0, 0.6);
     s1->material.diffuse = 0.7;
     s1->material.specular = .2;
-    w.addObject(s1);
+    w.addObject(std::move(s1));
 
     std::unique_ptr<Shape> s2 = std::make_unique<Sphere>();
     s2->set_transform(Scaling(.5, .5, .5));
-    w.addObject(s2);
+    w.addObject(std::move(s2));
 
     return w;
 }
@@ -29,7 +29,7 @@ void World::setLight(PointLight light) {
     this->light = light;
 }
 
-void World::addObject(std::unique_ptr<Shape> &obj) {
+void World::addObject(std::unique_ptr<Shape> obj) {
     this->objects.push_back(std::move(obj));
 }
 

@@ -29,7 +29,7 @@ Ray Camera::ray_for_pixel(int x, int y) const {
     return Ray(origin,direction);
 }
 
-Canvas Camera::render(World world) const {
+Canvas Camera::render(World &world) const {
     Canvas image = Canvas(this->hsize, this->vsize);
     for(int y = 0; y < this->vsize; y++) {
         for(int x = 0; x < this->hsize; x++) {

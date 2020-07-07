@@ -19,6 +19,8 @@ public:
     World() {
     };
 
+    World(const World &) = delete;
+    World(World &&) = default;
     static World DefaultWorld();
 
     PointLight light = PointLight(Point(0, 0, 0), Color(0, 0, 0));
@@ -26,7 +28,7 @@ public:
 
     void setLight(PointLight light);
 
-    void addObject(std::unique_ptr<Shape> &obj);
+    void addObject(std::unique_ptr<Shape> obj);
 
     std::vector<std::unique_ptr<Shape>> objects;
 

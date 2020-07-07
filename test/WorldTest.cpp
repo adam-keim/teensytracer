@@ -25,18 +25,18 @@ TEST_CASE("Basic world operations") {
         s2->set_transform(Scaling(.5, .5, .5));
         World w = World::DefaultWorld();
         CHECK(w.light == light);
-//        CHECK(w.objects[0] == s1.get());
-//        CHECK(w.objects[1] == s2.get());
+        CHECK(*w.objects[0] == *s1);
+        CHECK(*w.objects[1] == *s2);
 
     }SECTION("Intersect a world with a ray") {
         World w = World::DefaultWorld();
         Ray r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
         std::vector<Intersection> xs = w.intersect_world(r);
-//        CHECK(xs.size() == 4);
-//        CHECK(xs[0].t == 4);
-//        CHECK(xs[1].t == 4.5);
-//        CHECK(xs[2].t == 5.5);
-//        CHECK(xs[3].t == 6.0);
+        CHECK(xs.size() == 4);
+        CHECK(xs[0].t == 4);
+        CHECK(xs[1].t == 4.5);
+        CHECK(xs[2].t == 5.5);
+        CHECK(xs[3].t == 6.0);
     }SECTION("Shading an intersection") {
         auto w = World::DefaultWorld();
         auto r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
@@ -89,16 +89,16 @@ TEST_CASE("Testing for shadows") {
         auto p = Point(-2, 2, -2);
         CHECK(!w.is_shadowed(p));
     }SECTION("shade_hit() is given an intersection in shadow") {
-        auto w = World();
+        World w;
         w.light = PointLight(Point(0, 0, -10), Color(1, 1, 1));
         std::unique_ptr<Shape> s1 = std::make_unique<Sphere>();
-        w.addObject(s1);
+        w.addObject(std::move(s1));
         std::unique_ptr<Shape> s2 = std::make_unique<Sphere>();
         s2->set_transform(Translation(0, 0, 10));
-        w.addObject(s2);
         auto r = Ray(Point(0, 0, 5), Vector(0, 0, 1));
         auto i = Intersection(4, s2.get());
         auto comps = i.prepare_computations(r);
+        w.addObject(std::move(s2));
         auto c = w.shade_hit(comps);
         CHECK(c == Color(0.1, 0.1, 0.1));
     }
